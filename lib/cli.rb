@@ -1,24 +1,36 @@
-def class_names
-    response = RestClient.get('http://dnd5eapi.co/api/classes/')
-    parsed = JSON.parse(response)
-    parsed["results"].map do |prof|
-        prof["name"]
-    end
-end
+require_relative 'methods.rb'
 
-def class_choice
-    prompt = TTY::Prompt.new
-    choice = prompt.select("Choose your profession", (class_names))
-end
+class Cli 
+    attr_reader :user
 
-def race_names
-    response = RestClient.get('http://dnd5eapi.co/api/races/')
-    parsed = JSON.parse(response)
-    parsed["results"].map do |race|
-        race["name"]
+    def initialize(user)
+        @user = user
     end
-end
-def race_choice
-    prompt = TTY::Prompt.new
-    choice = prompt.select("Choose your race", (race_names))
-end
+
+    # def menu
+    #     prompt = TTY::Prompt.new
+    #     choice = prompt.select("Welcome to the DnD main menu!",("Start a game"), ("Manage users"), "Exit")
+    # end
+
+    def start
+        puts "Hello, #{@user}. Lets choose a character!"
+        choice = race_choice 
+        if choice == "Exit"
+            puts "bye"
+            exit
+        else 
+            choice_2 = class_choice 
+            if choice_2 == "Exit"
+                puts "bye"
+                exit
+            end
+        end
+        User.create(name: @user, race: choice, profession: choice_2)
+
+        puts item(choice_2)
+
+
+
+
+    end
+end 
