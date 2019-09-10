@@ -10,3 +10,5 @@ ActiveRecord::Base.establish_connection(
     database: 'db/bookuser.db'
 )
 
+binding.pry
+0
