@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190910150237) do
+ActiveRecord::Schema.define(version: 2019_09_10_230556) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -21,12 +21,17 @@ ActiveRecord::Schema.define(version: 20190910150237) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.string  "name"
-    t.string  "location"
+    t.string "name"
+    t.string "location"
     t.integer "river_id"
     t.integer "company_id"
+    t.boolean "favorites", default: false
     t.index ["company_id"], name: "index_trips_on_company_id"
     t.index ["river_id"], name: "index_trips_on_river_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
   end
 
 end
