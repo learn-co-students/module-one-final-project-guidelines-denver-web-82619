@@ -10,27 +10,21 @@ ActiveRecord::Base.establish_connection(
 ActiveRecord::Base.logger = nil
 prompt = TTY::Prompt.new
 
-answer = prompt.ask("Welcome to your next adventure! What is your name?")
-username = User.new(answer)
-puts "Welcome #{username.name}!"
+#User.sign_in
 
-choice = prompt.select("Where do you want to go?? your options:", ["numero 1", "numer 2", "or three!"])
+
+choice = prompt.select("View By", ["Rivers", "Companies", "Trips Available"])
 case choice 
-when "numero 1"
+when "Rivers"
     system("clear")
-     "yay you picked number one"
-  
-     
-when "numer 2"    
-     "the second"
-when "or three!"    
-     "oh snap!"
-    
+    puts River.all.map{|river| river.name}.join( )     
+when "Companies"    
+    puts Company.all.map{|company| company.name}.join( )
+
+when "Trips Available"    
+    puts Trip.all.map{|trip| trip.name}.join( )
      
 end
-
-#binding.pry
-
 
 
 1
