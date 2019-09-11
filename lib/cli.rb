@@ -22,33 +22,54 @@ class Cli
     puts " 1.) Abra\n 2.) Pikachu"
     poke_choice = gets.chomp.downcase
     # Use include? enumerable to check if it actually exists in the api
-    if poke_choice == 'abra' || poke_choice =='pikachu'
-      player = PokeApi.get(pokemon: "#{poke_choice}").name
-      location
+    if poke_choice == 'abra'
+      player = Pokemon.all[0]
+      location(player)
+    elsif poke_choice =='pikachu'
+     player = Pokemon.all[1]
+      location(player)
     else
       puts 'Not a valid choice'
       start
     end
   end
 
-  def location
+  def location(player)
     puts 'Which location would you like to challenge?'
     puts " - Volcano\n - Pond"
     location_choice = gets.chomp.downcase
     if location_choice == 'volcano'
       puts 'hot!'
-      volcano_battle
+      volcano_battle(player)
     elsif location_choice == 'pond'
       puts 'wet!'
-      pond_battle
+      pond_battle(player)
     else
       puts 'Not a valid location! Choose again.'
       location
     end
   end
 
-  # battle methods! per location and a general battle method containing a while loop for HP > 0.
-  def battle
+  def volcano_battle(player)
+    enemy = Pokemon.all[1]
+    battle(player, enemy)
+  end
+
+  def battle(player, enemy)
+    player_health = player.health
+    enemy_health = enemy.health
+    while player_health.positive? || enemy_health.positive?
+      enemy_health -= player_turn(player, enemy, player_health, enemy_health)
+      player_health -= enemy_turn(player, enemy, player_health, enemy_health)
+    end
+  end
+
+  def player_turn(player, enemy, player_health, enemy_health)
     
+    
+  end
+
+  def enemy_turn(player, enemy, player_health, enemy_health)
+    puts 'oof'
   end
 end
