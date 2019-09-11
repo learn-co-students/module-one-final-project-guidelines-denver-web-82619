@@ -48,4 +48,7 @@ class Cli
   end
 
   # battle methods! per location and a general battle method containing a while loop for HP > 0.
+  def battle
+    
+  end
 end
