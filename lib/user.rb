@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
     has_many :books, through: :bookusers
 
     def self.get_user_name
-        all.pluck(:name)
+        all.pluck(:user_name)
     end
     
 
