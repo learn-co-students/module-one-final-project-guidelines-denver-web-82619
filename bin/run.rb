@@ -11,11 +11,16 @@ def home_menu
 
 end 
 
-def existing_user_list
+def user_menu
+
+end 
+
+def existing_user
     prompt = TTY::Prompt.new
     user_list = User.get_user_name
     user_select = prompt.select("Select a user", (user_list))
-    
+
+    print_list 
 end 
 
 def welcome_existing
@@ -23,54 +28,38 @@ def welcome_existing
 
 end 
 
-def welcome_new
+def welcome_message 
+    choices = ["an existing user", "a new user"]
     puts "Hello! Welcome to the Bookshelf"
-    puts "What is your name?"
-    user_name = gets.chomp
-    User.create(name: user_name)
-    puts "Welcome, #{user_name}! Please select a title to view info." 
-    puts ""
-end 
+    prompt = TTY::Prompt.new 
+    user_type = prompt.select("Are you:", (choices))
 
-def book_list
-    Book.all.map do |book|
-        book.title
+    
+    case user_type
+    when "an existing user"
+        existing_user
+    when "a new user"
+        new_user
     end 
-end 
-
-def print_list
-    list = ""
-    counter = 0
-    while book_list[counter] do 
-        list += "#{counter + 1}. #{book_list[counter]}" + "\n"
-        counter += 1
-    end
-    puts list
-    choose_title
     
 end 
 
-def choose_title
-    user_input = gets.chomp
-    case user_input
-    when "1"
-        puts "You chose 1!"
-    when "2"
-        puts "You chose 2"
-    when "3"
-        puts "You chose 3"
-    when "4"
-        puts "You chose 4"
-    when "5"
-        puts "You chose 5"
-    else
-        puts "Not a valid option"
 
-    print_list
+def new_user
+    puts "Welcome! What is your name?"
+    user_name = gets.chomp
+    User.create(name: user_name)
+    puts "Welcome, #{user_name}! Please select a title to view info."
 
-    end 
+    print_list 
 
+end 
 
+def print_list
+    prompt = TTY::Prompt.new
+    book_list = Book.get_book_list
+    select_book = prompt.select("Choose a title", (book_list))
+    exit 
 end 
 
 
@@ -78,10 +67,13 @@ def display_book_info
 
 end 
 
-# binding.pry
+binding.pry
 
-existing_user_list
-welcome_new
-print_list
+# existing_user
+# welcome_message 
+# print_list
+
+
+welcome_message
 
 
