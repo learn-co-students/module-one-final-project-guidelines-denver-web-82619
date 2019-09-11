@@ -7,3 +7,5 @@ percy = Book.create(title: "Percy Jackson", author: "Rick Riordan", genre: "fant
 bell = Book.create(title: "The Bell Jar", author: "Sylvia Plath", genre: "fiction", blurb: "the best ever")
 unfortunate = Book.create(title: "Series of Unfortunate Events", author: "Lemony Snicket", genre: "fiction", blurb: "magical")
 matilda = Book.create(title: "Matilda", author: "Roald Dahl", genre: "fiction", blurb: "about a young girl")
+
+

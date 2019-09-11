@@ -1,14 +1,16 @@
 require 'sinatra/activerecord'
 require 'require_all'
+require 'pry'
+
 require_all 'lib'
 
-# require 'bundler'
-# Bundler.require
 
 ActiveRecord::Base.establish_connection(
     adapter: 'sqlite3',
     database: 'db/bookuser.db'
 )
 
-binding.pry
+ActiveRecord::Base.logger = nil
+
+# binding.pry
 0
