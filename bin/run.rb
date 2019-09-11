@@ -1,15 +1,35 @@
 require_relative '../config/environment'
 require_all 'lib'
+require 'pry'
 
-def welcome_message
+def home_menu
+    puts "Home Menu" "\n"
+    puts ""
+    puts "Existing User" "\n"
+    puts "New User" "\n"
+    puts "Exit Program" "\n"
+
+end 
+
+def existing_user_list
+    prompt = TTY::Prompt.new
+    user_list = User.get_user_name
+    user_select = prompt.select("Select a user", (user_list))
+    
+end 
+
+def welcome_existing
+    puts "Welcome back "
+
+end 
+
+def welcome_new
     puts "Hello! Welcome to the Bookshelf"
     puts "What is your name?"
     user_name = gets.chomp
     User.create(name: user_name)
     puts "Welcome, #{user_name}! Please select a title to view info." 
     puts ""
-
-    # print_list
 end 
 
 def book_list
@@ -58,7 +78,10 @@ def display_book_info
 
 end 
 
-welcome_message
+# binding.pry
+
+existing_user_list
+welcome_new
 print_list
 
 
