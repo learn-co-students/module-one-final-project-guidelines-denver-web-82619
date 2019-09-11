@@ -8,5 +8,8 @@ class Pokemon < ActiveRecord::Base
     value = PokeAtt.all.select do |pokemonattacks|
       pokemonattacks.pokemon.name == self.name
     end
+    value.map do |pokeatt|
+      pokeatt.attack.name
+    end[0]
   end
 end
