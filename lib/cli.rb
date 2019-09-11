@@ -51,29 +51,36 @@ class Cli
   end
 
   def volcano_battle(player)
-    enemy = Pokemon.all[1]
+    enemy = Pokemon.all.sample
     battle(player, enemy)
   end
 
   def battle(player, enemy)
     player_health = player.health
     enemy_health = enemy.health
-    while player_health > 0 || enemy_health > 0
+    while player_health.positive? && enemy_health.positive?
       enemy_health -= player_turn(player)
-      binding.pry
+      puts "The enemy has #{enemy_health} HP left!"
       player_health -= enemy_turn(enemy)
-      binding.pry
+      puts "You have #{player_health} HP left!"
+    end
+    if player_health.positive?
+      location(player)
+    else
+      main_menu
     end
   end
 
   def player_turn(player)
     puts 'What attack would you like to use?'
     puts player.attacks
-    move_choice = gets.chomp
+    move_choice = gets.chomp.downcase
     PokeAtt.damage_value(move_choice)
   end
 
   def enemy_turn(enemy)
-    10
+    move_choice = enemy.enemy_attack.sample.downcase
+    puts "The enemy used #{move_choice}!"
+    PokeAtt.damage_value(move_choice)
   end
 end
