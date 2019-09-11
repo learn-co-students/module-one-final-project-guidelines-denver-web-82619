@@ -1,3 +1,4 @@
+
 # Menu
 def menu
     prompt = TTY::Prompt.new
@@ -5,7 +6,20 @@ def menu
     if choice == "Exit"
         exit
     elsif choice == "Delete Users"
-        #another method 
+        user_names = User.all.map do |user|
+            user.name
+        end
+        delete = prompt.select("Which user would you like to delete?", (user_names), "Exit") 
+        if delete == delete
+            delete_id = User.find_by(name: delete).id
+            Userweapon.find_by(user_id: delete_id).destroy
+            User.find_by(id: delete_id).destroy
+            puts "You successfully deleted #{delete}"
+            menu
+        elsif delete == "Exit"
+            exit
+        end 
+
     end 
 end
 
@@ -38,26 +52,28 @@ end
         choice = prompt.select("Choose your race", (race_names), "Exit")
     end 
 
-#Items Methods 
+# Adventure Methods 
 
+def adventure_path1
+    prompt = TTY::Prompt.new
+    choice = prompt.select("What would you like to do first?","Explore the town!", "Start your adventure on the beaten path!", "Quit Game") 
+    if choice == "Explore the town!"
+        #add choice 
+    elsif choice == "Start your adventure on the beaten path!" 
+        puts `clear`
 
-# def item (choice)
-#     items_array = ["Assassin's Dagger", "Club", "Fiery Power Staff", "Quarterstaff", "Rustblade", "Warlock’s Scepter", "Crossbow", "Spear"]
-#     if choice == "Barbarian" || choice == "Fighter"
-#         given_weapon = Weapon.create(name: items_array[1], category: "Melee Weapon")
-#         puts "You have been given the #{items_array[1]}"
+        puts "As you walk the path, you notice a lush forest and an old, abandoned house."
+        prompt2 = TTY::Prompt.new
+        path_choice = prompt2.select("Would you like to inspect the house or follow the path into the forest?", "Inspect the house", "Follow the path into the forest")
+        if path_choice == "Inspect the house"
+            puts "As you inspect the house, you notice that it is sealed shut. The windows are borded and the house is locked.\n 
+            You continue walking around the house, and notice a sack with something inside.\n
+            Upon further inspection you find a mace!"
+        elsif path_choice == "Follow the path into the forest"
+        end
 
-#     elsif choice == "Bard" || choice == "Paladin" || choice == "Monk"
-#         given_weapon = Weapon.create(name: items_array[7], category: "Melee Weapon")
-#         puts "You have been given the #{items_array[7]}"
+    elsif choice == "Quit Game"
+        exit
+    end
 
-#     elsif choice == "Ranger" || choice == "Rogue" || choice == "Druid"
-#         given_weapon = Weapon.create(name: items_array[6], category: "Melee Weapon")
-#         puts "You have been given the #{items_array[6]}"
-
-#     elsif choice == "Sorcerer" || choice == "Warlock" || choice == "Wizard" || choice == "Cleric"
-#         given_weapon = Weapon.create(name: items_array[3], category: "Melee Weapon")
-#         puts "You have been given the #{items_array[3]}"
-#     end
-# end
-
+end

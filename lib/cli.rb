@@ -27,7 +27,8 @@ class Cli
         end
         created_user = User.create(name: @user, race: choice, profession: choice_2)
 
-        
+        puts `clear`
+
 
         def item (choice)
             items_array = ["Assassin's Dagger", "Club", "Fiery Power Staff", "Quarterstaff", "Rustblade", "Warlock’s Scepter", "Crossbow", "Spear"]
@@ -52,7 +53,14 @@ class Cli
 
         puts item(choice_2)
         Userweapon.create(user: created_user, weapon: Weapon.all.last)
-        binding.pry
+        puts "Welcome to town, #{choice.downcase}!" 
+
+        adventure_path1 
+
+        puts `clear`
+
+
+
 
 
     end
