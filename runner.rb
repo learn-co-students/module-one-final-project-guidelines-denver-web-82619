@@ -2,4 +2,5 @@
 
 require './config/environment'
 
-puts 'wtf bundler'
+new = Cli.new
+new.main_menu
