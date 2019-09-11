@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
     Cli.new(new_user)
   end
 
+  def self.get_user
+    all.pluck(:name)
+  end
+
+
   def my_trips
     
   end

@@ -12,13 +12,27 @@ class Cli
         @@all << self
     end
 
-    def start
-        puts "Hello, #{user.name}! Do you want to go on an adventure?"
-        response = gets.chomp
+
+    def self.start
+        system("clear")
+        user_status = PROMPT.select("Have you been on an adventure with us before?", ["You betcha", "Nope"])
+            case user_status
+                when "You betcha"
+                    binding.pry
+                    username = PROMPT.select("My name is", User.get_user)
+                        case username 
+                            when User.find_by_name(username)
+                                 puts "Welcome #{username}"
+                         end
+                 when "Nope"
+                User.sign_in
+            end
+        #puts "Hello, #{user.name}! Do you want to go on an adventure?"
     end
 
     
     def user_main_menu
+        system("clear")
         choice = PROMPT.select("View By", ["Rivers", "Companies", "Trips Available", "I'm ready to go rafting!!!"])
         case choice 
         when "Rivers"
@@ -31,7 +45,7 @@ class Cli
             choose_by_company
         when "Trips Available"
             system("clear")    
-            puts Trip.all.map{|trip| trip.name}
+            all_trips
             puts ""
             user_main_menu
         when "I'm ready to go rafting!!!"
@@ -45,12 +59,31 @@ class Cli
         end
     end
     
+    def all_trips
+        Trip.all.each do |trip|
+            puts ""
+            puts "#{trip.name} on the #{trip.river.name} river with #{trip.company.name}"
+            puts ""
+        end
+        puts ""
+        puts ""
+        next_trip = PROMPT.select("Would you like to return to the main menu?", ["Yes, fo sho!", "No, leave me alone"])
+        case next_trip
+        when "Yes, fo sho!"
+            system("clear")
+            user_main_menu
+        when "No, leave me alone"
+            system("clear")
+            exit
+        end
+    end
 
     def display_trips_per_river(river_name)
+        system("clear")
+        puts ""
         puts ""
         puts ""
         puts "Trips available on the #{river_name} River!"
-        puts ""
         River.find_by_name(river_name).trips.map do |trip| 
             puts ""
             puts "#{trip.name}, located in #{trip.location}" 
@@ -90,31 +123,31 @@ class Cli
                 choose_by_river
             when "Upper Colorado"
                 system("clear")
-                puts "No trips on this river currently!"
+                display_trips_per_river("Upper Colorado")
                 puts ""
                 puts ""
                 choose_by_river
             when "Cache La Poudre"
                 system("clear")
-                puts "No trips on this river currently!"
+                display_trips_per_river("Cache La Poudre")
                 puts ""
                 puts ""
                 choose_by_river
             when "North Platte"
                 system("clear")
-                puts "No trips on this river currently!"
+                display_trips_per_river("North Platte")
                 puts ""
                 puts ""
                 choose_by_river
             when "Animas"
                 system("clear")
-                puts "No trips on this river currently!"
+                display_trips_per_river("Animas")
                 puts ""
                 puts ""
                 choose_by_river
             when "San Miguel"
                 system("clear")
-                puts "No trips on this river currently!"
+                display_trips_per_river("San Miguel")
                 puts ""
                 puts ""
                 choose_by_river
@@ -137,51 +170,41 @@ class Cli
     
             when "Liquid Descents"
                 system("clear")
-                # display_trips_per_company("Liquid Descents")
-                puts "No trips for this company currently!"
+                display_trips_per_company("Liquid Descents")
                 puts ""
                 puts ""
-                puts "Please select a different company"
                 puts ""
                 choose_by_company
     
             when "Rocky Mountain Adventures"
                 system("clear")
-                # display_trips_per_company("Rocky Mountain Adventures")
-                puts "No trips for this company currently!"
+                display_trips_per_company("Rocky Mountain Adventures")
                 puts ""
                 puts ""
-                puts "Please select a different company"
                 puts ""
                 choose_by_company
     
             when "Wanderlust"
                 system("clear")
-                # display_trips_per_company("Wanderlust")
-                puts "No trips for this company currently!"
+                display_trips_per_company("Wanderlust")
                 puts ""
                 puts ""
-                puts "Please select a different company"
                 puts ""
                 choose_by_company
     
             when "Raft Masters"
                 system("clear")
-                # display_trips_per_company("Raft Masters")
-                puts "No trips for this company currently!"
+                display_trips_per_company("Raft Masters")
                 puts ""
                 puts ""
-                puts "Please select a different company"
                 puts ""
                 choose_by_company
     
             when "4 Corners Whitewater"
                 system("clear")
-                # display_trips_per_company("4 Corners Whitewater")
-                puts "No trips for this company currently!"
+                display_trips_per_company("4 Corners Whitewater")
                 puts ""
                 puts ""
-                puts "Please select a different company"
                 puts ""
                 choose_by_company
             when "Backpadde one!"

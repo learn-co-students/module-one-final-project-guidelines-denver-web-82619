@@ -2,7 +2,7 @@ require 'sinatra/activerecord'
 require 'require_all'
 require 'pry'
 require 'tty-prompt'
-require 'csv'
+
 
 require_all 'lib'
 
@@ -11,11 +11,11 @@ ActiveRecord::Base.establish_connection(
 # ActiveRecord::Base.logger = nil
 
 PROMPT = TTY::Prompt.new
- 
-binding.pry
-# cli = User.sign_in
+Cli.start
+User.get_user
+cli = User.sign_in
 
-# cli.user_main_menu
+cli.user_main_menu
 
 #user_main_menu
 #binding.pry
