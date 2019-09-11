@@ -41,15 +41,23 @@ end
 #Items Methods 
 
 
-def item (choice_2)
-    items_array = ["Assassin's Dagger", "Club", "Fiery Power Staff", "Quarterstaff", "Rustblade", "Warlock’s Scepter", "Crossbow", "Spear"]
-    if choice_2 == "Barbarian" || choice_2 == "Fighter"
-        items_array[1]
-    elsif choice_2 == "Bard" || choice_2 == "Paladin" || choice_2 == "Monk"
-        items_array[7]
-    elsif choice_2 == "Ranger" || choice_2 == "Rogue" 
-        items_array[6]
-    elsif choice_2 == "Sorcerer" || choice_2 == "Warlock" || choice_2 == "Wizard"
-        items_array[3]
-    end
-end
+# def item (choice)
+#     items_array = ["Assassin's Dagger", "Club", "Fiery Power Staff", "Quarterstaff", "Rustblade", "Warlock’s Scepter", "Crossbow", "Spear"]
+#     if choice == "Barbarian" || choice == "Fighter"
+#         given_weapon = Weapon.create(name: items_array[1], category: "Melee Weapon")
+#         puts "You have been given the #{items_array[1]}"
+
+#     elsif choice == "Bard" || choice == "Paladin" || choice == "Monk"
+#         given_weapon = Weapon.create(name: items_array[7], category: "Melee Weapon")
+#         puts "You have been given the #{items_array[7]}"
+
+#     elsif choice == "Ranger" || choice == "Rogue" || choice == "Druid"
+#         given_weapon = Weapon.create(name: items_array[6], category: "Melee Weapon")
+#         puts "You have been given the #{items_array[6]}"
+
+#     elsif choice == "Sorcerer" || choice == "Warlock" || choice == "Wizard" || choice == "Cleric"
+#         given_weapon = Weapon.create(name: items_array[3], category: "Melee Weapon")
+#         puts "You have been given the #{items_array[3]}"
+#     end
+# end
+
