@@ -57,7 +57,7 @@ class Cli
 
         adventure_path1 
 
-        puts `clear`
+        # puts `clear`
 
 
 

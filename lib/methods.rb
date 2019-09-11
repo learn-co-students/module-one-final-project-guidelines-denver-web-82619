@@ -61,14 +61,15 @@ def adventure_path1
         #add choice 
     elsif choice == "Start your adventure on the beaten path!" 
         puts `clear`
-
         puts "As you walk the path, you notice a lush forest and an old, abandoned house."
         prompt2 = TTY::Prompt.new
         path_choice = prompt2.select("Would you like to inspect the house or follow the path into the forest?", "Inspect the house", "Follow the path into the forest")
-        if path_choice == "Inspect the house"
-            puts "As you inspect the house, you notice that it is sealed shut. The windows are borded and the house is locked.\n 
-            You continue walking around the house, and notice a sack with something inside.\n
-            Upon further inspection you find a mace!"
+        if path_choice == "Inspect the house" 
+            puts `clear`
+            puts "As you inspect the house, you notice that it is sealed shut. The windows are borded and the house is locked."
+            puts "You continue walking around the house, and notice a sack with something inside."
+            puts "Upon further inspection you find a mace!" 
+
         elsif path_choice == "Follow the path into the forest"
         end
 
@@ -76,4 +77,6 @@ def adventure_path1
         exit
     end
 
-end
+end 
+
+
