@@ -46,7 +46,7 @@ class Cli
       pond_battle(player)
     else
       puts 'Not a valid location! Choose again.'
-      location
+      location(player)
     end
   end
 
@@ -58,18 +58,22 @@ class Cli
   def battle(player, enemy)
     player_health = player.health
     enemy_health = enemy.health
-    while player_health.positive? || enemy_health.positive?
-      enemy_health -= player_turn(player, enemy, player_health, enemy_health)
-      player_health -= enemy_turn(player, enemy, player_health, enemy_health)
+    while player_health > 0 || enemy_health > 0
+      enemy_health -= player_turn(player)
+      binding.pry
+      player_health -= enemy_turn(enemy)
+      binding.pry
     end
   end
 
-  def player_turn(player, enemy, player_health, enemy_health)
-    
-    
+  def player_turn(player)
+    puts 'What attack would you like to use?'
+    puts player.attacks
+    move_choice = gets.chomp
+    PokeAtt.damage_value(move_choice)
   end
 
-  def enemy_turn(player, enemy, player_health, enemy_health)
-    puts 'oof'
+  def enemy_turn(enemy)
+    10
   end
 end
