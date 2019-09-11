@@ -25,11 +25,34 @@ class Cli
                 exit
             end
         end
-        User.create(name: @user, race: choice, profession: choice_2)
+        created_user = User.create(name: @user, race: choice, profession: choice_2)
+
+        
+
+        def item (choice)
+            items_array = ["Assassin's Dagger", "Club", "Fiery Power Staff", "Quarterstaff", "Rustblade", "Warlock’s Scepter", "Crossbow", "Spear"]
+            if choice == "Barbarian" || choice == "Fighter"
+                given_weapon = Weapon.create(name: items_array[1], category: "Melee Weapon")
+                puts "You have been given the #{items_array[1]}"
+        
+            elsif choice == "Bard" || choice == "Paladin" || choice == "Monk"
+                given_weapon = Weapon.create(name: items_array[7], category: "Melee Weapon")
+                puts "You have been given the #{items_array[7]}"
+        
+            elsif choice == "Ranger" || choice == "Rogue" || choice == "Druid"
+                given_weapon = Weapon.create(name: items_array[6], category: "Melee Weapon")
+                puts "You have been given the #{items_array[6]}"
+        
+            elsif choice == "Sorcerer" || choice == "Warlock" || choice == "Wizard" || choice == "Cleric"
+                given_weapon = Weapon.create(name: items_array[3], category: "Melee Weapon")
+                puts "You have been given the #{items_array[3]}"
+            end
+            
+        end
 
         puts item(choice_2)
-
-
+        Userweapon.create(user: created_user, weapon: Weapon.all.last)
+        binding.pry
 
 
     end

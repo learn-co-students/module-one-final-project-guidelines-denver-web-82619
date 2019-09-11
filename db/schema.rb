@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_211549) do
+ActiveRecord::Schema.define(version: 2019_09_11_172624) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 2019_09_10_211549) do
     t.string "name"
     t.string "race"
     t.string "profession"
+  end
+
+  create_table "userweapons", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "weapon_id"
+    t.index ["user_id"], name: "index_userweapons_on_user_id"
+    t.index ["weapon_id"], name: "index_userweapons_on_weapon_id"
+  end
+
+  create_table "weapons", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
   end
 
 end

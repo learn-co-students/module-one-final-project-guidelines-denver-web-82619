@@ -5,4 +5,4 @@ ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/dnd_ga
 require_all 'lib'
 
 
-
+ActiveRecord::Base.logger = nil

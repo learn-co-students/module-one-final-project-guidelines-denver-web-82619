@@ -16,5 +16,5 @@ new_game.start
 
 prompt = TTY::Prompt.new
 
-binding.pry
+# binding.pry
 0
