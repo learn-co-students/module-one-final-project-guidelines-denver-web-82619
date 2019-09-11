@@ -11,3 +11,5 @@ ActiveRecord::Base.establish_connection(
   database: 'db/pokemon.db'
 )
 require_all 'lib'
+
+binding.pry
