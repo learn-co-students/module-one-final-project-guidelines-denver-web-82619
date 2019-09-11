@@ -12,18 +12,18 @@
 
 ActiveRecord::Schema.define(version: 2019_09_11_193331) do
 
+  create_table "book_users", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "user_id"
+    t.index ["book_id"], name: "index_book_users_on_book_id"
+    t.index ["user_id"], name: "index_book_users_on_user_id"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "author"
     t.string "genre"
     t.string "blurb"
-  end
-
-  create_table "bookusers", force: :cascade do |t|
-    t.integer "book_id"
-    t.integer "user_id"
-    t.index ["book_id"], name: "index_bookusers_on_book_id"
-    t.index ["user_id"], name: "index_bookusers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
