@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
 
   def self.sign_in
     name = @@prompt.ask("Welcome to your next adventure! What is your name?")
-    User.create(name: name)
+    new_user = User.create(name: name)
+    Cli.new(new_user)
   end
 
   def my_trips

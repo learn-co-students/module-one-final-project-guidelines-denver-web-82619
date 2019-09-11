@@ -1,7 +1,7 @@
 User.destroy_all
-Trip.destroy_all
 River.destroy_all
 Company.destroy_all
+Trip.destroy_all
 
 User.create(name: "Lizzy")
 
@@ -19,24 +19,3 @@ poudre = River.create(name: "Cache La Poudre")
 n_platte = River.create(name: "North Platte")
 animas = River.create(name: "Animas")
 s_miguel = River.create(name: "San Miguel")
-
-
-
-trip1 = Trip.create({
-    name: "Brown's Canyon",
-    location: "Buena Vista",
-    river: arkansas,
-    company: ava
-})
-trip2 = Trip.create({
-    name: "Numbers and Narrows",
-    location: "Buena Vista",
-    river: arkansas,
-    company: ava
-})
-trip3 = Trip.create({
-    name: "Royal Gorge",
-    location: "Cañon City",
-    river: arkansas,
-    company: ava
-})
