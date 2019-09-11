@@ -1,0 +1,22 @@
+﻿company_id,location,river_id,name,rapid_level,age,cost
+2,Idaho Springs,2,Splishy Splashy,3,5,55
+2,Idaho Springs,2,Wet and Wild,4,14,55
+2,Kremmling,3,Upper Colorado Float Trip,3,5,60
+2,Kremmling,3,Gore Canyon,5,16,160
+3,Fort Collins,4,Upper Poudre,4,13,120
+3,Kremmling,3,Rancho Rafting,3,6,350
+3,Idaho Springs,2,Get'n Rowdy,4,13,65
+3,Walden,5,Raft and Relax,3,13,300
+4,Fort Collins,4,Taste ,3,7,60
+4,Fort Collins,4,Blast ,4,18,75
+5,Canon City,1,Royal Gorge ,4,14,74
+5,Idaho Springs,2,Clear Creek Classic ,2,5,49
+5,Idaho Springs,2,Clear Creek Extreme,5,18,99
+6,Durango,6,Upper Animas,4,13,265
+6,Telluride,7,Wave Rider,3,8,89
+1,Buena Vista,1,Brown's Canyon,4,7,74
+1,Kremmling,3,Scenic Float,2,2,104
+1,Buena Vista,1,Numbers and Narrows,5,15,119
+1,Idaho Springs,2,Crazy Creek,5,14,69
+1,Durango,6,Krazy Kids,2,7,89
+1,Canon City,1,Royal Gorge Xtreme,5,15,135
