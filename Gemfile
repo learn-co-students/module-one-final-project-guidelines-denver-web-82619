@@ -8,3 +8,5 @@ gem "sinatra", "~> 2.0"
 gem "sinatra-activerecord", "~> 2.0"
 gem "require_all", "~> 2.0"
 gem "rest-client"
+
+gem "pry", "~> 0.12.2"
