@@ -14,3 +14,4 @@ PROMPT = TTY::Prompt.new
 
 person = Cli.start
 person.user_main_menu
+person.choose_by_location
