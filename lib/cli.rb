@@ -62,9 +62,9 @@ class Cli
         puts "Welcome to town, #{choice.downcase}!"
 
         adventure_path1 
-        binding.pry
+        #binding.pry
 
-        # puts `clear`
+      
 
 
 
