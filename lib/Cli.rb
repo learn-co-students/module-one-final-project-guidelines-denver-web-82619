@@ -18,16 +18,17 @@ class Cli
         user_status = PROMPT.select("Have you been on an adventure with us before?", ["You betcha", "Nope"])
             case user_status
                 when "You betcha"
-                    binding.pry
                     username = PROMPT.select("My name is", User.get_user)
-                        case username 
-                            when User.find_by_name(username)
-                                 puts "Welcome #{username}"
-                         end
-                 when "Nope"
-                User.sign_in
+                        case username
+                            when User.find_by_name(username).name
+                            puts "Welcome back #{username}! Let's find another adventure!"
+                            Cli.new(User.find_by_name(username))
+                        end
+                when "Nope"
+                        new_user = User.sign_in
+                        puts "Hello, #{new_user.user.name}! Let's find an adventure!"
+                        new_user
             end
-        #puts "Hello, #{user.name}! Do you want to go on an adventure?"
     end
 
     
