@@ -21,12 +21,15 @@ class Cli
                     username = PROMPT.select("My name is", User.get_user)
                         case username
                             when User.find_by_name(username).name
-                            puts "Welcome back #{username}! Let's find another adventure!"
+                            puts "Welcome back #{username}! Let's find another adventure!" 
+                            sleep(3)
                             Cli.new(User.find_by_name(username))
                         end
                 when "Nope"
+                        system("clear")
                         new_user = User.sign_in
                         puts "Hello, #{new_user.user.name}! Let's find an adventure!"
+                        sleep(3)
                         new_user
             end
     end
@@ -34,9 +37,11 @@ class Cli
     
     def user_main_menu
         system("clear")
-        choice = PROMPT.select("View By", ["Rivers", "Companies", "Trips Available", "I'm ready to go rafting!!!"])
+        choice = PROMPT.select("View By", ["Rivers", "Companies", "All Trips Available", "Company Headquarters' Location", "I'm ready to go rafting!!!"])
         case choice 
         when "Rivers"
+            puts ""
+            puts ""
             system("clear")
             choose_by_river    
         when "Companies"    
@@ -44,11 +49,17 @@ class Cli
             puts ""
             puts ""
             choose_by_company
-        when "Trips Available"
-            system("clear")    
-            all_trips
+        when "All Trips Available"
+            system("clear")  
             puts ""
+            puts ""  
+            all_trips
             user_main_menu
+        when "Company Headquarters' Location"
+            system("clear")
+            puts ""
+            puts ""
+            choose_by_location
         when "I'm ready to go rafting!!!"
             system("clear")
             puts ""
@@ -60,6 +71,65 @@ class Cli
         end
     end
     
+    def choose_by_location
+        system("clear")
+        locations = Trip.all.map {|trip| trip.location}.uniq
+        city_location = PROMPT.select("Select a city to view trips available in that area", locations)
+        case city_location
+            when "Idaho Springs"
+                puts ""
+                puts ""
+                display_trips_by_location("Idaho Springs")
+            when "Kremmling"
+                puts ""
+                puts ""
+                display_trips_by_location("Kremmling")
+            when "Fort Collins"
+                puts ""
+                puts ""
+                display_trips_by_location("Fort Collins")
+            when "Walden"
+                puts ""
+                puts ""
+                display_trips_by_location("Walden")
+            when "Canon City"
+                puts ""
+                puts ""
+                display_trips_by_location("Canon City")
+            when "Durango"
+                puts ""
+                puts ""
+                display_trips_by_location("Durango")
+            when "Telluride"
+                puts ""
+                puts ""
+                display_trips_by_location("Telluride")
+            when "Buena Vista" 
+                puts ""
+                puts ""
+                display_trips_by_location("Buena Vista")
+            end
+        end
+
+    def display_trips_by_location(location)
+        puts ""
+        location_trips = Trip.all.find_by location: location
+        puts "Trip Name: #{location_trips.name}"
+        puts "Company: #{location_trips.company.name}"
+        puts "River Name: #{location_trips.river.name}"
+        puts "Rapid Level: #{location_trips.rapid_level}"
+        puts "Cost: $#{location_trips.cost}"
+        next_action = PROMPT.select("Would you like to return to the main menu?",["Yes, fo sho!", "No, leave me alone"])
+            case next_action
+            when "Yes, fo sho!"
+                system("clear")
+                user_main_menu
+            when "No, leave me alone"
+                system("clear")
+                exit
+    end
+    end
+
     def all_trips
         trip_list = Trip.all.map { |trip| "#{trip.name}" }
         trip_list << "BACKPADDLE!"
