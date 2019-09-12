@@ -17,12 +17,12 @@ class Cli
         puts "Hello, #{@user}. Lets choose a character!"
         choice = race_choice 
         if choice == "Exit"
-            puts "bye"
+            puts "Bye"
             exit
         else 
             choice_2 = class_choice 
             if choice_2 == "Exit"
-                puts "bye"
+                puts "Bye"
                 exit
             end
         end
@@ -40,19 +40,19 @@ class Cli
             items_array = ["Assassin's Dagger", "Club", "Fiery Power Staff", "Quarterstaff", "Rustblade", "Warlock’s Scepter", "Crossbow", "Spear"]
             if choice == "Barbarian" || choice == "Fighter"
                 given_weapon = Weapon.create(name: items_array[1], category: "Melee Weapon")
-                puts "You have been given the #{items_array[1]}"
+                puts "You have been given the #{items_array[1]}".yellow.blink
         
             elsif choice == "Bard" || choice == "Paladin" || choice == "Monk"
                 given_weapon = Weapon.create(name: items_array[7], category: "Melee Weapon")
-                puts "You have been given the #{items_array[7]}"
+                puts "You have been given the #{items_array[7]}".yellow.blink
         
             elsif choice == "Ranger" || choice == "Rogue" || choice == "Druid"
                 given_weapon = Weapon.create(name: items_array[6], category: "Melee Weapon")
-                puts "You have been given the #{items_array[6]}"
+                puts "You have been given the #{items_array[6]}".yellow.blink
         
             elsif choice == "Sorcerer" || choice == "Warlock" || choice == "Wizard" || choice == "Cleric"
                 given_weapon = Weapon.create(name: items_array[3], category: "Melee Weapon")
-                puts "You have been given the #{items_array[3]}"
+                puts "You have been given the #{items_array[3]}".yellow.blink
             end
             
         end

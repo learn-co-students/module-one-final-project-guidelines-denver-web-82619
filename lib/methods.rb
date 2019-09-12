@@ -63,6 +63,8 @@ def inventory
     end
     Weapon.all.select do |weapon|
         weapon.id == ids[0] || weapon.id == ids[1]
+    end.map do |item|
+        item.name
     end
 end
 
@@ -88,7 +90,7 @@ def adventure_path1
         puts `clear`
         puts "As you walk the path, you notice a lush forest and an old, abandoned house."
         prompt2 = TTY::Prompt.new
-        path_choice = prompt2.select("Would you like to inspect the house or follow the path into the forest?", "Inspect the house", "Follow the path into the forest")
+        path_choice = prompt2.select("Would you like to inspect the house or follow the path into the forest?", "Inspect the house", "Follow the path into the forest", "Check inventory")
         if path_choice == "Inspect the house" 
             puts `clear`
             puts "As you inspect the house, you notice that it is sealed shut. The windows are borded and the house is locked."
@@ -97,13 +99,28 @@ def adventure_path1
             new_weapon("Mace", "Melee")
             puts "You continue down the path into the confines of the thick spruce forest. As you stroll, you come to a fork in the road. "
             puts "To your left the path continues to a grassy clearing, and to your right the path leads deeper into the pine-bound forests of olde."
-            path_house_choice = prompt.select("Where shall you go?", "Head left, to the clearing.", "Delve deeper into the sea of trees.")
+            path_house_choice = prompt.select("Where shall you go?", "Head left, to the clearing.", "Delve deeper into the sea of trees.", "Check inventory")
             if path_house_choice == "Head left, to the clearing."
 
             elsif path_house_choice == "Delve deeper into the sea of trees."
                 #Combat method
+            elsif path_house_choice == "Check inventory"
+                puts "You have #{inventory.join(", ")}"
             end
         elsif path_choice == "Follow the path into the forest"
+            puts "You continue down the path into the confines of the thick spruce forest. As you stroll, you come to a fork in the road. "
+            puts "To your left the path continues to a grassy clearing, and to your right the path leads deeper into the pine-bound forests of olde."
+            path_forest_choice = prompt.select("Where shall you go?", "Head left, to the clearing.", "Delve deeper into the sea of trees.", "Check inventory")
+                if path_forest_choice == "Head left, into the clearing."
+
+                elsif path_forest_choice == "Delve deeper into the sea of trees."
+                    #Combat method
+                elsif path_forest_choice == "Check inventory"
+                    puts "You have a #{inventory.join(", ")}"
+                end
+        elsif path_choice == "Check inventory"
+            #Impliment/search for way to loop back to the original prompt
+           puts "You have a #{inventory.join()}"
         end
 
     elsif choice == "Quit Game"
