@@ -12,6 +12,3 @@ ActiveRecord::Base.establish_connection(
 PROMPT = TTY::Prompt.new
 
 person = Cli.start
-person.favorites
-person.favorite_trips_display
-# person.user_main_menu
