@@ -241,4 +241,51 @@ class Cli
             end
     end
 
+    def favorites
+        self.user.trips
+    end
+
+    def add_to_favorites(new_fav_trip)
+        favorites << new_fav_trip
+    end
+
+    def favorite_trips_display
+        system("clear")
+        puts ""
+        puts "Your favorite trips:"
+        puts "----------------------------------------------"
+        select_fav = favorites.map { |fav| "#{fav.name}"}
+        trip_to_plan = PROMPT.select("Select a trip to view details and plan an adventure!", select_fav)
+        case trip_to_plan
+            when user.trips.find_by_name(trip_to_plan).name
+                current_trip = user.trips.find_by_name(trip_to_plan)
+                puts "#{current_trip.name}"
+                puts "River: #{current_trip.river.name}"
+                puts "Company: #{current_trip.company.name}"
+                puts "Company Headquarters Location: #{current_trip.location}"
+                puts "Minimun age requirement: #{current_trip.age}"
+                puts "Cost per person: $#{current_trip.cost}"
+                puts "----------------------------------------------"
+                plan_it = PROMPT.select("Plan this trip?", ["Heck yes! Let's do it!", "No thanks, not my jam."])
+                case plan_it
+                    when "Heck yes! Let's do it!"
+                        num_people = PROMPT.ask("How many people will be rafting?", convert: :int)
+                        total_cost = current_trip.cost * num_people
+                        puts "For #{num_people} people, at #{current_trip.cost} per person..."
+                        puts ""
+                        puts "The total cost will be $#{total_cost}!"
+                        puts ""
+                        return_to_menu = PROMPT.select("Where to?", ["Return to main menu", "Return to my favorites"])
+                        case return_to_menu
+                            when "Return to main menu"
+                                user_main_menu
+                            when "Return to my favorites"
+                                favorite_trips_display
+                            end 
+                    when "No thanks, not my jam."
+                        user_main_menu
+                end
+        end
+    end
+
 end
