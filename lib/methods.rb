@@ -10,17 +10,24 @@ def menu
         user_names = User.all.map do |user|
             user.name
         end
-        delete = prompt.select("Which user would you like to delete?", (user_names), "Exit") 
-        if delete == delete
-            delete_id = User.find_by(name: delete).id
-            Userweapon.find_by(user_id: delete_id).destroy
-            User.find_by(id: delete_id).destroy
-            puts "You successfully deleted #{delete}"
+        delete = prompt.select("Which user would you like to delete?", (user_names), "Delete all users", "Exit") 
+        if delete == "Delete all users"
+            Userweapon.destroy_all
+            User.destroy_all 
+            Weapon.destroy_all
+            puts "You have successfull deleted all users"
             menu
         elsif delete == "Exit"
             exit
+        else 
+            delete_id = User.find_by(name: delete).id
+            weaponid = Userweapon.find_by(user_id: delete_id).weapon_id
+            Userweapon.find_by(user_id: delete_id).destroy
+            User.find_by(id: delete_id).destroy
+            Weapon.find_by(id: weaponid).destroy
+            puts "You successfully deleted #{delete}"
+            menu 
         end 
-
     end 
 end
 
@@ -84,14 +91,15 @@ end
 def adventure_path1
     prompt = TTY::Prompt.new
     choice = prompt.select("What would you like to do first?","Explore the town!", "Start your adventure on the beaten path!", "Quit Game") 
-    if choice == "Explore the town!"
+    case choice
+    when "Explore the town!"
         #add choice 
-    elsif choice == "Start your adventure on the beaten path!" 
+    when "Start your adventure on the beaten path!" 
         puts `clear`
         puts "As you walk the path, you notice a lush forest and an old, abandoned house."
-        prompt2 = TTY::Prompt.new
-        path_choice = prompt2.select("Would you like to inspect the house or follow the path into the forest?", "Inspect the house", "Follow the path into the forest", "Check inventory")
-        if path_choice == "Inspect the house" 
+        path_choice = prompt.select("Would you like to inspect the house or follow the path into the forest?", "Inspect the house", "Follow the path into the forest", "Check inventory")
+        case path_choice 
+        when "Inspect the house" 
             puts `clear`
             puts "As you inspect the house, you notice that it is sealed shut. The windows are borded and the house is locked."
             puts "You continue walking around the house, and notice a sack with something inside."
@@ -101,15 +109,15 @@ def adventure_path1
             puts "To your left the path continues to a grassy clearing, and to your right the path leads deeper into the pine-bound forests of olde."
             path_house_choice = prompt.select("Where shall you go?", "Head left, to the clearing.", "Delve deeper into the sea of trees.", "Check inventory")
             if path_house_choice == "Head left, to the clearing."
-
+                    #clearing method
             elsif path_house_choice == "Delve deeper into the sea of trees."
                 #Combat method
                 
             elsif path_house_choice == "Check inventory"
-                puts "You have #{inventory.join(", ")}"
+               puts "You have #{inventory.join(", ")}"
             end
 
-        elsif path_choice == "Follow the path into the forest"
+        when "Follow the path into the forest"
             puts "You continue down the path into the confines of the thick spruce forest. As you stroll, you come to a fork in the road. "
             puts "To your left the path continues to a grassy clearing, and to your right the path leads deeper into the pine-bound forests of olde."
             path_forest_choice = prompt.select("Where shall you go?", "Head left, to the clearing.", "Delve deeper into the sea of trees.", "Check inventory")
@@ -120,12 +128,13 @@ def adventure_path1
                 elsif path_forest_choice == "Check inventory"
                     puts "You have a #{inventory.join(", ")}"
                 end
-        elsif path_choice == "Check inventory"
+        when "Check inventory"
             #Impliment/search for way to loop back to the original prompt
            puts "You have a #{inventory.join()}"
+           path_forest_choice
         end
 
-    elsif choice == "Quit Game"
+    when "Quit Game"
         exit
     end
 
