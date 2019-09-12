@@ -99,36 +99,29 @@ class Cli
 
 
     def view_shelf
-        prompt = TTY::Prompt.new
+        @user.reload
+        prompt = TTY::Prompt.new        
         list = prompt.select("Your bookshelf:", (@user.get_bookshelf_list))
 
-        display_book_info(list)
-        # puts @user.get_bookshelf_list 
-        # binding.pry
-        
+        display_book_info(list) 
     end 
     
     def add_to_shelf(book)
         
         BookUser.create(book: book, user: @user)
-        user_menu 
+        view_shelf
 
-        # binding.pry
-        0
-    end 
-
-    def new_shelf
-        prompt = TTY::Prompt.new
-
-        new_list = prompt.select("Your bookshelf:", (@user.get_bookshelf_list))
     end 
 
     def remove_from_shelf(book)
-       BookUser.all.find do |bookuser|
+        BookUser.all.find do |bookuser|
             bookuser.book == book
         end.destroy    
         view_shelf
-        # binding.pry
+    end 
+
+    def placeholder
+
     end 
 
    
