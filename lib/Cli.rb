@@ -131,21 +131,40 @@ class Cli
     end
 
     def all_trips
-        Trip.all.each do |trip|
-            puts ""
-            puts "#{trip.name} on the #{trip.river.name} river with #{trip.company.name}"
-            puts ""
-        end
-        puts ""
-        puts ""
-        next_trip = PROMPT.select("Would you like to return to the main menu?", ["Yes, fo sho!", "No, leave me alone"])
-        case next_trip
-        when "Yes, fo sho!"
+        trip_list = Trip.all.map { |trip| "#{trip.name}" }
+        trip_list << "BACKPADDLE!"
+        select_trip = PROMPT.select("Select a trip to view details \nor select BACKPADDLE! to return to main menu", trip_list)
+        case select_trip
+        when "BACKPADDLE!"
             system("clear")
             user_main_menu
-        when "No, leave me alone"
-            system("clear")
-            exit
+        when Trip.all.find_by_name(select_trip).name
+            current_trip = Trip.all.find_by_name(select_trip)
+            puts "#{current_trip.name}"
+            puts "River: #{current_trip.river.name}"
+            puts "Company: #{current_trip.company.name}"
+            puts "Company Headquarters Location: #{current_trip.location}"
+            puts "Minimun age requirement: #{current_trip.age}"
+            puts "Cost per person: $#{current_trip.cost}"
+            add_to_fav_prompt = PROMPT.select("Add this trip to your favorites?", ["Yes please!!", "Nah man, I'm good"])
+                case add_to_fav_prompt
+                    when "Yes please!!"
+                        add_to_favorites(current_trip)
+                        puts "Added to your favorites!"
+                        puts ""
+                        back_to_main = PROMPT.select("Where to?", ["Show me my favorites!","Show me all the trips available", "Uhm... backpaddle to main menu?"])
+                        case back_to_main
+                            when "Show me all the trips available"
+                                system("clear")
+                                all_trips
+                            when "Uhm... backpaddle to main menu?"
+                                user_main_menu
+                            when "Show me my favorites!"
+                                favorite_trips_display
+                            end
+                    when "Nah man, I'm good"
+                        all_trips
+                    end 
         end
     end
 
