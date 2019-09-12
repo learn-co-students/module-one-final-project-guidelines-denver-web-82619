@@ -71,15 +71,34 @@ end
 # Adventure Methods 
 
 #Combat method
-# def combat
-#     prompt = TTY::Prompt.new
-#     combat_choice = prompt.select("A goblin springs upon you as you follow the path! It's holding a thick branch made to look like a club." "Fight", "Run")
-#     if combat_choice == "Fight"
-#         fight_choice = prompt.select("You ready yourself for an attack.", "Attack with ")
-#     elsif
+def combat
+    player_hp = 20
+    enemy_hp = 10
+    enemy_attack_num = rand(1..5)
+    player_attack_num = rand(3..10)
+    prompt = TTY::Prompt.new
+    combat_choice = prompt.select("A goblin springs upon you as you follow the path! It's holding a thick branch made to look like a club." "Fight", "Run")
+    if combat_choice == "Fight"
+        fight_choice = prompt.select("You ready yourself for an attack.", "Attack with #{inventory[0]}", "Attack with #{inventory[1]}")
+        if fight_choice == fight_choice
+            
+    elsif combat_choice == "Run"
+        num = rand(1..20)
+        if num > 9
+            puts "You rolled a #{num} and successfully ran from the Goblin"
+        elsif num < 10
+            puts "You rolled a #{num} and the goblin gets a free hit!"
+            new_hp = player_hp - enemy_attack_num
+            puts "You now have #{new_hp}"
+            enemy_fight_choice = prompt.select("You have been hit by the goblin." "Fight", "Run")
+            if enemy_fight_choice == "Fight"
+                fight_choice
+            else
 
-#     end
-# end 
+            end
+        end
+    end
+end 
 
 def adventure_path1
     prompt = TTY::Prompt.new
@@ -104,7 +123,7 @@ def adventure_path1
 
             elsif path_house_choice == "Delve deeper into the sea of trees."
                 #Combat method
-                
+
             elsif path_house_choice == "Check inventory"
                 puts "You have #{inventory.join(", ")}"
             end
