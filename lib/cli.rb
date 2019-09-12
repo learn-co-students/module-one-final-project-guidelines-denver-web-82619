@@ -120,5 +120,9 @@ class Cli
         view_shelf
     end 
 
+    def placeholder
+
+    end 
+
    
 end 
