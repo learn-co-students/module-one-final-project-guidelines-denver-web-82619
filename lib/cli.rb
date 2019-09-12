@@ -1,6 +1,6 @@
 class Cli
     def user_menu
-        choices = ["view my shelf", "view book list", "switch user", "exit"]
+        choices = ["view my shelf", "view book list", "switch user", "log out"]
         prompt = TTY::Prompt.new
         user_choice = prompt.select("Would you like to:", (choices))
             case user_choice
@@ -10,8 +10,8 @@ class Cli
                 print_list
             when "switch user"
                 existing_user
-            when "exit"
-                exit 
+            when "log out"
+                welcome_message 
             end 
 
     end 
@@ -28,7 +28,7 @@ class Cli
     
     
     def welcome_message 
-        choices = ["an existing user", "a new user"]
+        choices = ["an existing user", "a new user", "exit"]
         puts "Hello! Welcome to the Bookshelf!"
         puts ""
         prompt = TTY::Prompt.new 
@@ -40,6 +40,8 @@ class Cli
             existing_user
         when "a new user"
             new_user
+        when "exit"
+            exit
         end 
         
     end 
