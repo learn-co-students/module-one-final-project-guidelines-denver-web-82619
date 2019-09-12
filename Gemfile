@@ -10,3 +10,7 @@ gem "require_all", "~> 2.0"
 gem "rest-client"
 
 gem "pry", "~> 0.12.2"
+
+gem "tty-color", "~> 0.5.0"
+
+gem "colorize", "~> 0.8.1"

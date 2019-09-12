@@ -1,3 +1,4 @@
+require 'colorize'
 require_relative 'methods.rb'
 
 class Cli 
@@ -29,7 +30,12 @@ class Cli
 
         puts `clear`
 
-
+        def new_weapon(name, category)
+            Weapon.create(name: name, category: "#{category} Weapon")
+            Userweapon.create(user: User.all.last, weapon: Weapon.all.last)
+            puts `clear`
+            puts "#{name} was added to your inventory.".yellow.blink
+        end
         def item (choice)
             items_array = ["Assassin's Dagger", "Club", "Fiery Power Staff", "Quarterstaff", "Rustblade", "Warlock’s Scepter", "Crossbow", "Spear"]
             if choice == "Barbarian" || choice == "Fighter"
@@ -53,9 +59,10 @@ class Cli
 
         puts item(choice_2)
         Userweapon.create(user: created_user, weapon: Weapon.all.last)
-        puts "Welcome to town, #{choice.downcase}!" 
+        puts "Welcome to town, #{choice.downcase}!"
 
         adventure_path1 
+        binding.pry
 
         # puts `clear`
 

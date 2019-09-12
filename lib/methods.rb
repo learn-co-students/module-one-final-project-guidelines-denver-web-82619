@@ -1,3 +1,4 @@
+require_relative 'cli.rb'
 
 # Menu
 def menu
@@ -52,7 +53,31 @@ end
         choice = prompt.select("Choose your race", (race_names), "Exit")
     end 
 
+#Inventory Method
+def inventory
+    userweps = Userweapon.all.select do |userwep|
+        userwep.user_id == User.all.last.id
+    end
+    ids = userweps.map do |weapons|
+        weapons.weapon_id
+    end
+    Weapon.all.select do |weapon|
+        weapon.id == ids[0] || weapon.id == ids[1]
+    end
+end
+
 # Adventure Methods 
+
+#Combat method
+# def combat
+#     prompt = TTY::Prompt.new
+#     combat_choice = prompt.select("A goblin springs upon you as you follow the path! It's holding a thick branch made to look like a club." "Fight", "Run")
+#     if combat_choice == "Fight"
+#         fight_choice = prompt.select("You ready yourself for an attack.", "Attack with ")
+#     elsif
+
+#     end
+# end 
 
 def adventure_path1
     prompt = TTY::Prompt.new
@@ -68,8 +93,16 @@ def adventure_path1
             puts `clear`
             puts "As you inspect the house, you notice that it is sealed shut. The windows are borded and the house is locked."
             puts "You continue walking around the house, and notice a sack with something inside."
-            puts "Upon further inspection you find a mace!" 
+            puts "Upon further inspection you find a mace!"
+            new_weapon("Mace", "Melee")
+            puts "You continue down the path into the confines of the thick spruce forest. As you stroll, you come to a fork in the road. "
+            puts "To your left the path continues to a grassy clearing, and to your right the path leads deeper into the pine-bound forests of olde."
+            path_house_choice = prompt.select("Where shall you go?", "Head left, to the clearing.", "Delve deeper into the sea of trees.")
+            if path_house_choice == "Head left, to the clearing."
 
+            elsif path_house_choice == "Delve deeper into the sea of trees."
+                #Combat method
+            end
         elsif path_choice == "Follow the path into the forest"
         end
 
