@@ -1,5 +1,3 @@
-require 'activerecord_reset_pk_sequence'
-
 User.destroy_all
 River.destroy_all
 Company.destroy_all
@@ -7,6 +5,7 @@ Trip.destroy_all
 
 
 User.create(name: "Lizzy")
+User.create(name: "Martin")
 
 ava = Company.create(id: 1, name: "AVA")
 l_descents = Company.create(id: 2, name: "Liquid Descents")
