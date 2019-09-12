@@ -18,7 +18,6 @@ class Cli
         user_status = PROMPT.select("Have you been on an adventure with us before?", ["You betcha", "Nope"])
             case user_status
                 when "You betcha"
-                    binding.pry
                     username = PROMPT.select("My name is", User.get_user)
                         case username 
                             when User.find_by_name(username)
