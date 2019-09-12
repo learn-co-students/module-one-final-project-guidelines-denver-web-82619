@@ -1,5 +1,4 @@
 class Cli
-    
     def user_menu
         choices = ["view my shelf", "view book list", "switch user", "exit"]
         prompt = TTY::Prompt.new
@@ -96,8 +95,6 @@ class Cli
         end 
     end 
 
-
-
     def view_shelf
         @user.reload
         prompt = TTY::Prompt.new        
@@ -120,9 +117,6 @@ class Cli
         view_shelf
     end 
 
-    def placeholder
-
-    end 
 
    
 end 
