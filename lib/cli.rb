@@ -98,9 +98,14 @@ class Cli
 
 
 
-    def view_shelf
+    def view_shelf(deleted = "none")
         prompt = TTY::Prompt.new
-        list = prompt.select("Your bookshelf:", (@user.get_bookshelf_list))
+        choices = @user.get_bookshelf_list
+        # binding.pry
+        if deleted != "none"
+            choices = choices.reject {|delete| delete == deleted}
+        end
+        list = prompt.select("Your bookshelf:", (choices))
 
         display_book_info(list)
         # puts @user.get_bookshelf_list 
@@ -127,7 +132,7 @@ class Cli
        BookUser.all.find do |bookuser|
             bookuser.book == book
         end.destroy    
-        view_shelf
+        view_shelf(book.title)
         # binding.pry
     end 
 
