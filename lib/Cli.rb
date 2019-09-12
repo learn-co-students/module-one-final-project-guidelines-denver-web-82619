@@ -113,21 +113,23 @@ class Cli
 
     def display_trips_by_location(location)
         puts ""
-        location_trips = Trip.all.find_by location: location
-        puts "Trip Name: #{location_trips.name}"
-        puts "Company: #{location_trips.company.name}"
-        puts "River Name: #{location_trips.river.name}"
-        puts "Rapid Level: #{location_trips.rapid_level}"
-        puts "Cost: $#{location_trips.cost}"
+        Trip.where(location: location).map do |trip|
+            puts "Trip Name: #{trip.name}"
+            puts "Company: #{trip.company.name}"
+            puts "River Name: #{trip.river.name}"
+            puts "Rapid Level: #{trip.rapid_level}"
+            puts "Cost: $#{trip.cost}"
+            puts ""
+        end 
         next_action = PROMPT.select("Would you like to return to the main menu?",["Yes, fo sho!", "No, leave me alone"])
-            case next_action
+        case next_action
             when "Yes, fo sho!"
                 system("clear")
                 user_main_menu
             when "No, leave me alone"
                 system("clear")
                 exit
-    end
+        end
     end
 
     def all_trips

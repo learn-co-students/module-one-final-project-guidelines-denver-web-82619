@@ -14,3 +14,4 @@ gem "pry", "~> 0.12.2"
 gem "tty-prompt", "~> 0.19.0"
 gem "require_all", "~> 2.0"
 gem 'activerecord_reset_pk_sequence'
+gem "tty-box"
