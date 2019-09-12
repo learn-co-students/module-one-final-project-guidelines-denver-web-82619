@@ -104,9 +104,11 @@ def adventure_path1
 
             elsif path_house_choice == "Delve deeper into the sea of trees."
                 #Combat method
+                
             elsif path_house_choice == "Check inventory"
                 puts "You have #{inventory.join(", ")}"
             end
+
         elsif path_choice == "Follow the path into the forest"
             puts "You continue down the path into the confines of the thick spruce forest. As you stroll, you come to a fork in the road. "
             puts "To your left the path continues to a grassy clearing, and to your right the path leads deeper into the pine-bound forests of olde."
