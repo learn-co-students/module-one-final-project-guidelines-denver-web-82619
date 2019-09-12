@@ -11,11 +11,6 @@ ActiveRecord::Base.establish_connection(
 # ActiveRecord::Base.logger = nil
 
 PROMPT = TTY::Prompt.new
-# Cli.start
-# User.get_user
-# cli = User.sign_in
 
-# cli.user_main_menu
-
-#user_main_menu
-binding.pry
+person = Cli.start
+person.user_main_menu
