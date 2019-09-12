@@ -1,7 +1,19 @@
 class Cli
-
+    
     def user_menu
-        
+        choices = ["view my shelf", "view book list", "switch user", "exit"]
+        prompt = TTY::Prompt.new
+        user_choice = prompt.select("Would you like to:", (choices))
+            case user_choice
+            when "view my shelf"
+                view_shelf
+            when "view book list"
+                print_list
+            when "switch user"
+                existing_user
+            when "exit"
+                exit 
+            end 
 
     end 
     
@@ -12,13 +24,9 @@ class Cli
         user_select = prompt.select("Select a user", (user_list))
         @user = User.all.find {|user| user.user_name == user_select}
         puts "Welcome back, #{@user.name}."
-        print_list 
+        user_menu 
     end 
     
-    def welcome_existing
-        puts "Welcome back "
-    
-    end 
     
     def welcome_message 
         choices = ["an existing user", "a new user"]
@@ -44,7 +52,7 @@ class Cli
         puts "Create a username"
         user_name = gets.chomp
         puts ""
-        User.create(name: name_user, user_name: user_name)
+        @user = User.create(name: name_user, user_name: user_name)
         puts "Welcome, #{name_user}! Please select a title to view info."
      
         print_list 
@@ -67,23 +75,61 @@ class Cli
         puts selected_book.genre
         puts selected_book.blurb
         puts ""
-    
+        
+        in_bookshelf = @user.books.include?(selected_book)
+        
         prompt = TTY::Prompt.new
-        choices = ["Add to bookshelf.", "Return to book list."]
+        if in_bookshelf == true
+            choices = ["Remove from bookshelf.", "Return to menu."]
+        elsif in_bookshelf == false
+            choices = ["Add to bookshelf.", "Return to menu."]
+        end
         choice = prompt.select("What would you like to do?", (choices))
     
         case choice
         when "Add to bookshelf."
             add_to_shelf(selected_book)
-        when "Return to book list."
-            print_list
+        when "Remove from bookshelf."
+            remove_from_shelf(selected_book)
+        when "Return to menu."
+            user_menu
         end 
+    end 
+
+
+
+    def view_shelf
+        prompt = TTY::Prompt.new
+        list = prompt.select("Your bookshelf:", (@user.get_bookshelf_list))
+
+        display_book_info(list)
+        # puts @user.get_bookshelf_list 
+        # binding.pry
+        
     end 
     
     def add_to_shelf(book)
-        BookUser.create(book: book, user: @user )
         
-        binding.pry
+        BookUser.create(book: book, user: @user)
+        user_menu 
+
+        # binding.pry
         0
     end 
+
+    def new_shelf
+        prompt = TTY::Prompt.new
+
+        new_list = prompt.select("Your bookshelf:", (@user.get_bookshelf_list))
+    end 
+
+    def remove_from_shelf(book)
+       BookUser.all.find do |bookuser|
+            bookuser.book == book
+        end.destroy    
+        view_shelf
+        # binding.pry
+    end 
+
+   
 end 
