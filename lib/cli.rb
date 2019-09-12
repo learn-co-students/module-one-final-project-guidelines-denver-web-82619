@@ -17,12 +17,12 @@ class Cli
         puts "Hello, #{@user}. Lets choose a character!"
         choice = race_choice 
         if choice == "Exit"
-            puts "bye"
+            puts "Bye"
             exit
         else 
             choice_2 = class_choice 
             if choice_2 == "Exit"
-                puts "bye"
+                puts "Bye"
                 exit
             end
         end
