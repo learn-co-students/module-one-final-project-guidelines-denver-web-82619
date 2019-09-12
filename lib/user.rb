@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
         # BookUser.all.select do |bookuser|
         #     bookuser.user == self 
         # end 
-        self.books.map do |book|
+        books.map do |book|
             # book.reload
             # binding.pry
             book.title
