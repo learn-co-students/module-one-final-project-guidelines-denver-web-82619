@@ -42,7 +42,7 @@ class Cli
     def user_main_menu
         system("clear")
         Graphics.header
-        choice = PROMPT.select("View By", ["Rivers", "Companies", "All Trips Available", "Company Headquarters' Location", "My Favorites", "I'm ready to go rafting!!!"])
+        choice = PROMPT.select("View By", ["Rivers", "Companies", "All Trips Available", "Company Headquarters' Location", "My Favorites", "Abandon Ship!"])
         case choice 
         when "Rivers"
             choose_by_river    
@@ -54,8 +54,16 @@ class Cli
         when "Company Headquarters' Location"
             choose_by_location
         when "My Favorites"
-            favorite_trips_display
-        when "I'm ready to go rafting!!!"
+            if self.favorites == []
+                system("clear")
+                Graphics.header
+                puts "You have no favorites! View trips to add one to your favorites!"
+                sleep(3)
+                user_main_menu
+            else
+                favorite_trips_display
+            end
+        when "Abandon Ship!"
             system("clear")
             Graphics.exit_message
                 exit
@@ -101,14 +109,12 @@ class Cli
             puts "Cost: $#{trip.cost}"
             puts ""
         end 
-        next_action = PROMPT.select("Would you like to return to the main menu?",["Yes, fo sho!", "No, leave me alone"])
+        next_action = PROMPT.select("Where to?",["To the main menu!", "BACKPADDLE 1!!"])
         case next_action
-            when "Yes, fo sho!"
-                system("clear")
+            when "To the main menu!"
                 user_main_menu
-            when "No, leave me alone"
-                system("clear")
-                exit
+            when "BACKPADDLE 1!!"
+                choose_by_location
         end
     end
 
@@ -136,6 +142,8 @@ class Cli
             add_to_fav_prompt = PROMPT.select("Add this trip to your favorites?", ["Yes please!!", "Nah man, I'm good"])
                 case add_to_fav_prompt
                     when "Yes please!!"
+                        system("clear")
+                        Graphics.header
                         add_to_favorites(current_trip)
                         puts "Added to your favorites!"
                         puts ""
@@ -143,14 +151,17 @@ class Cli
                         case back_to_main
                             when "Show me all the trips available"
                                 system("clear")
+                                Graphics.header
                                 all_trips
                             when "Uhm... backpaddle to main menu?"
                                 user_main_menu
                             when "Show me my favorites!"
                                 favorite_trips_display
                             end
-                    when "Nah man, I'm good"
-                        all_trips
+                    when "Nah man, I'm good. Take me back to the main menu"
+                        user_main_menu
+                    when "BACKPADDLE 1!!"
+                        favorite_trips_display
                     end 
         end
     end
@@ -292,7 +303,7 @@ class Cli
                 puts "Minimun age requirement: #{current_trip.age}"
                 puts "Cost per person: $#{current_trip.cost}"
                 puts "----------------------------------------------"
-                plan_it = PROMPT.select("Plan this trip?", ["Heck yes! Let's do it!", "No thanks, not my jam."])
+                plan_it = PROMPT.select("Plan this trip?", ["Heck yes! Let's do it!", "BACKPADDLE 1!!", "Nah, back to the main menu"])
                 case plan_it
                     when "Heck yes! Let's do it!"
                         num_people = PROMPT.ask("How many people will be rafting?", convert: :int)
@@ -309,7 +320,9 @@ class Cli
                             when "Return to my favorites"
                                 favorite_trips_display
                             end 
-                    when "No thanks, not my jam."
+                    when "BACKPADDLE 1!!"
+                        favorite_trips_display
+                    when "Nah, back to the main menu"
                         user_main_menu
                 end
         end
