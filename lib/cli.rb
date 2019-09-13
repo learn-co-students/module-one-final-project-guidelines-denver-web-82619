@@ -17,7 +17,10 @@ class Cli
     end 
     
     def existing_user
-        
+        if User.get_user_name.first.nil?
+            puts "No existing users!"
+            new_user
+        end 
         prompt = TTY::Prompt.new
         user_list = User.get_user_name
         user_select = prompt.select("Select a user", (user_list))
@@ -106,6 +109,10 @@ class Cli
     end 
 
     def view_shelf
+        if @User.get_bookshelf_list.first.nil?
+            puts "Your bookshelf is empty!"
+            user_menu
+        end 
         @user.reload
         prompt = TTY::Prompt.new        
         list = prompt.select("Your bookshelf:", (@user.get_bookshelf_list))
