@@ -9,4 +9,6 @@ bell = Book.create(title: "The Bell Jar", author: "Sylvia Plath", genre: "Fictio
 unfortunate = Book.create(title: "Series of Unfortunate Events: The Bad Beginning", author: "Lemony Snicket", genre: "Fiction", blurb: "The Bad Beginning Theme of Courage. Courage. The Cowardly Lion \nwanted it, but in The Bad Beginning, the Baudelaires actually \nhave it. Throughout their story, these little children display \namazing bravery and strength in the face of some pretty terrible \nvillainy.")
 matilda = Book.create(title: "Matilda", author: "Roald Dahl", genre: "Fiction", blurb: "Matilda befriends her school teacher, Miss Honey. She soon \nrealizes Matilda's talents, but is later amazed to see the full \nextent of Matilda's powers. This is the story of a sweet bright \nlittle girl named Matilda, who is a child of wondrous \nintelligence. But unfortunately she is different from the rest \nof her family.")
 
+arina = User.create(name: "Arina", user_name: "avictor")
+danika = User.create(name: "Danika", user_name: "dbutter") 
 

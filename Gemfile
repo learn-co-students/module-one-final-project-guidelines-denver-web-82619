@@ -10,5 +10,4 @@ gem "activerecord", "~> 5.2"
 gem "sinatra", "~> 1.4"
 
 gem 'tty-prompt'
-gem 'word-wrap'
-
+gem 'tty-box'

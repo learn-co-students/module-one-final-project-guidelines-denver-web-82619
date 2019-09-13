@@ -23,22 +23,26 @@ class Cli
         user_select = prompt.select("Select a user", (user_list))
         @user = User.all.find {|user| user.user_name == user_select}
         puts "Welcome back, #{@user.name}."
+        system "clear"
         user_menu 
     end 
-    
-    
+        
     def welcome_message 
+    
         choices = ["an existing user", "a new user", "exit"]
         puts "Hello! Welcome to the Bookshelf!"
         puts ""
+
         prompt = TTY::Prompt.new 
         user_type = prompt.select("Are you:", (choices))
     
         
         case user_type
         when "an existing user"
+            system "clear"
             existing_user
         when "a new user"
+            system "clear"
             new_user
         when "exit"
             exit
@@ -55,6 +59,8 @@ class Cli
         puts ""
         @user = User.create(name: name_user, user_name: user_name)
         puts "Welcome, #{name_user}! Please select a title to view info."
+
+        system "clear"
      
         print_list 
     
@@ -90,9 +96,11 @@ class Cli
         case choice
         when "Add to bookshelf."
             add_to_shelf(selected_book)
+            system "clear"
         when "Remove from bookshelf."
             remove_from_shelf(selected_book)
         when "Return to menu."
+            system "clear"
             user_menu
         end 
     end 
@@ -103,12 +111,14 @@ class Cli
         list = prompt.select("Your bookshelf:", (@user.get_bookshelf_list))
 
         display_book_info(list) 
+        
     end 
     
     def add_to_shelf(book)
         
         BookUser.create(book: book, user: @user)
         view_shelf
+        system "clear"
 
     end 
 

@@ -7,12 +7,7 @@ class User < ActiveRecord::Base
     end
 
     def get_bookshelf_list
-        # BookUser.all.select do |bookuser|
-        #     bookuser.user == self 
-        # end 
         books.map do |book|
-            # book.reload
-            # binding.pry
             book.title
         end 
     end 
