@@ -57,11 +57,7 @@ class Cli
             favorite_trips_display
         when "I'm ready to go rafting!!!"
             system("clear")
-            puts ""
-            puts ""
-            puts "Chya bra! Lets do it!".center(50)
-            puts ""
-            puts ""
+            Graphics.exit_message
                 exit
         end
     end
