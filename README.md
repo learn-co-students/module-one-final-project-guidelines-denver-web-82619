@@ -11,7 +11,7 @@ Welcome to the Bookshelf, an app where you can view a list of books and their de
 
 ## DEMO
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/d1OYJV38r4A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Bookshelf Demo](https://youtu.be/d1OYJV38r4A)
 
 ## INSTALL INSTRUCTIONS 
 
