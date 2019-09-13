@@ -1,7 +1,7 @@
 class Cli
     def user_menu
         choices = ["view my shelf", "view book list", "switch user", "log out"]
-        prompt = TTY::Prompt.new
+        prompt = TTY::Prompt.new(symbols: {marker: '📚'})
         user_choice = prompt.select("Would you like to:", (choices))
             case user_choice
             when "view my shelf"
@@ -21,7 +21,7 @@ class Cli
             puts "No existing users!"
             new_user
         end 
-        prompt = TTY::Prompt.new
+        prompt = TTY::Prompt.new(symbols: {marker: '📚'})
         user_list = User.get_user_name
         user_select = prompt.select("Select a user", (user_list))
         @user = User.all.find {|user| user.user_name == user_select}
@@ -36,7 +36,7 @@ class Cli
         puts "Hello! Welcome to the Bookshelf!"
         puts ""
 
-        prompt = TTY::Prompt.new 
+        prompt = TTY::Prompt.new(symbols: {marker: '📚'})
         user_type = prompt.select("Are you:", (choices))
     
         
@@ -70,7 +70,7 @@ class Cli
     end 
     
     def print_list
-        prompt = TTY::Prompt.new
+        prompt = TTY::Prompt.new(symbols: {marker: '📚'})
         book_list = Book.get_book_list
         select_book = prompt.select("Choose a title", (book_list))
         display_book_info(select_book)
@@ -88,7 +88,7 @@ class Cli
         
         in_bookshelf = @user.books.include?(selected_book)
         
-        prompt = TTY::Prompt.new
+        prompt = TTY::Prompt.new(symbols: {marker: '📚'})
         if in_bookshelf == true
             choices = ["Remove from bookshelf.", "Return to menu."]
         elsif in_bookshelf == false
@@ -114,7 +114,7 @@ class Cli
             user_menu
         end 
         @user.reload
-        prompt = TTY::Prompt.new        
+        prompt = TTY::Prompt.new(symbols: {marker: '📚'})
         list = prompt.select("Your bookshelf:", (@user.get_bookshelf_list))
 
         display_book_info(list) 
