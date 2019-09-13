@@ -118,7 +118,4 @@ class Cli
         end.destroy    
         view_shelf
     end 
-
-
-   
 end 
