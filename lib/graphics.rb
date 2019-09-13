@@ -21,7 +21,7 @@ class Graphics
 
     def self.exit_message
         box = TTY::Box.frame(width: TTY::Screen.width, height: 20, border: :thick, align: :center,
-        title: {top_left: "Why can you never here pterodactyl go to the bathroom?", bottom_right: "The P is silent!" }) do
+        title: {top_left: "Why can you never hear pterodactyl go to the bathroom?", bottom_right: "The P is silent!" }) do
             "
             __        __ _            _            ____                   _         
             \\ \\      / /| |__    ___ ( )___       |  _ \\  ___   __ _   __| | _   _  
