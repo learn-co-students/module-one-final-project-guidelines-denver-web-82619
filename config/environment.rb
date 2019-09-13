@@ -12,8 +12,7 @@ ActiveRecord::Base.establish_connection(
 
 PROMPT = TTY::Prompt.new(symbols: {marker: "🌊"})
 
-Graphics.header
 
-# person = Cli.start
 
-# person.user_main_menu
+person = Cli.start
+person.user_main_menu
