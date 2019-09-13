@@ -109,7 +109,7 @@ class Cli
     end 
 
     def view_shelf
-        if @User.get_bookshelf_list.first.nil?
+        if @user.get_bookshelf_list.first.nil?
             puts "Your bookshelf is empty!"
             user_menu
         end 
