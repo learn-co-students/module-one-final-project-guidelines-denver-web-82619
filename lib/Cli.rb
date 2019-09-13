@@ -74,7 +74,7 @@ class Cli
         system("clear")
         Graphics.header
         locations = Trip.all.map {|trip| trip.location}.uniq
-        city_location = PROMPT.select("Select a city to view trips available in that area", locations)
+        city_location = PROMPT.select("Select a city to view trips available in that area", locations, per_page: 8)
         case city_location
             when "Idaho Springs"
                 display_trips_by_location("Idaho Springs")
@@ -121,7 +121,7 @@ class Cli
     def all_trips
         trip_list = Trip.all.map { |trip| "#{trip.name}" }
         trip_list << "BACKPADDLE!"
-        select_trip = PROMPT.select("Select a trip to view details \nor select BACKPADDLE! to return to main menu", trip_list)
+        select_trip = PROMPT.select("Select a trip to view details \nor select BACKPADDLE! to return to main menu", trip_list, per_page: trip_list.count)
         case select_trip
         when "BACKPADDLE!"
             system("clear")
@@ -195,7 +195,7 @@ class Cli
         Graphics.header
         all_rivers = River.all.map{|river| river.name}
         all_rivers << "Backpadde one!"
-        river = PROMPT.select("Choose a River to View Available Trips", all_rivers)
+        river = PROMPT.select("Choose a River to View Available Trips", all_rivers, per_page: all_rivers.count)
         case river 
             when "Arkansas"
                 display_trips_per_river("Arkansas")
@@ -229,7 +229,7 @@ class Cli
         Graphics.header
         all_companies = Company.all.map{|river| river.name}
         all_companies << "Backpadde one!"
-        company = PROMPT.select("Choose a Company to View Available Trips", all_companies)
+        company = PROMPT.select("Choose a Company to View Available Trips", all_companies, per_page: all_companies.count)
         case company
             when "AVA"
                 display_trips_per_company("AVA")
@@ -289,7 +289,7 @@ class Cli
         puts "Your favorite trips:"
         puts "----------------------------------------------"
         select_fav = favorites.map { |fav| "#{fav.name}"}
-        trip_to_plan = PROMPT.select("Select a trip to view details and plan an adventure!", select_fav)
+        trip_to_plan = PROMPT.select("Select a trip to view details and plan an adventure!", select_fav, per_page: select_fav.count)
         case trip_to_plan
             when user.trips.find_by_name(trip_to_plan).name
                 current_trip = user.trips.find_by_name(trip_to_plan)
